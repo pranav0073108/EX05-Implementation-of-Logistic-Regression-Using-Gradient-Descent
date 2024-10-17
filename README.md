@@ -8,29 +8,31 @@ To write a program to implement the the Logistic Regression Using Gradient Desce
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. Sets the learning rate and the number of iterations.
- 
-2. Defines the logistic function for outputting probabilities.
- 
-3. Adjusts weights using gradient descent based on the difference between predicted and actual values.
-  
-4. Returns class predictions based on the learned weights. 
+1.Initialization: Sets the learning rate and the number of iterations.
+2.Sigmoid Function: Defines the logistic function for outputting probabilities.
+3.Fit Method: Adjusts weights using gradient descent based on the difference between predicted and actual values.
+4.Predict Method: Returns class predictions based on the learned weights. 
+
 
 ## Program:
 ```
+/*
 Program to implement the the Logistic Regression Using Gradient Descent.
 Developed by: pranav k
-RegisterNumber: 2305001026
+RegisterNumber:2305001026  
+*/
 ```
 ```
 import pandas as pd
-import numpy as np
 data=pd.read_csv("/content/ex45Placement_Data.csv")
 data.head()
+
 data1=data.copy()
 data1.head()
+
 data1=data1.drop(['sl_no','salary'],axis=1)
 data1
+
 from sklearn.preprocessing import LabelEncoder
 le=LabelEncoder()
 data1["gender"]=le.fit_transform(data1["gender"])
@@ -42,52 +44,56 @@ data1["workex"]=le.fit_transform(data1["workex"])
 data1["specialisation"]=le.fit_transform(data1["specialisation"])
 data1["status"]=le.fit_transform(data1["status"])
 data1
+
+x=data1.iloc[:,:-1]
+x
+
+y=data1.iloc[:,-1]
+y
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+
+from sklearn.linear_model import LogisticRegression
+model=LogisticRegression(solver="liblinear")
+model.fit(x_train,y_train)
+
+y_pred=model.predict(x_test)
+y_pred,x_test
+
+from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
+accuracy=accuracy_score(y_test,y_pred)
+confusion=confusion_matrix(y_test,y_pred)
+cr=classification_report(y_test,y_pred)
+print("Accuracy score:",accuracy_score)
+print("Confusion matrix:\n",confusion)
+print("\nClassification_report:\n",cr)
+
+from sklearn import metrics
+cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion,display_labels=[True,False])
+cm_display.plot()
+
+from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
+accuracy_score(y_test,y_pred)
+confusion_matrix(y_test,y_pred)
+cr=classification_report(y_test,y_pred)
+print("Accuracy score:",accuracy)
+print("\nConfusion matrix:\n",confusion)
+print("\nClassification_Report:\n",cr)
+
 X=data1.iloc[:,:-1]
 Y=data1["status"]
-y_pred=predict(theta,X)
-accuracy=np.mean(y_pred.flatten()==y)
-print("Accuracy:",accuracy)
-print("Predicted:\n",y_pred)
-print("Actual:\n",y.values)
-xnew=np.array([[0,87,0,95,0,2,78,2,0,0,1,0]])
-y_prednew=predict(theta,xnew)
-print("Predicted Result:",y_prednew)
+
+theta=np.random.randn(X.shape[1])
+y=y
+def sigmoid(z):
+  return 1/(1+np.exp(-z))
+def loss(theta,x,y)
 ```
 
 ## Output:
-![image](https://github.com/user-attachments/assets/ba401cd4-b337-4132-b271-109cb0b328d4)
-![image](https://github.com/user-attachments/assets/cc564fb8-3801-4e8a-a433-94edf8dfd84c)
-
-
-
-## Result:
-Thus the program to implement the the Logistic Regression Using Gradient Descent is written and verified using python programming.
-
-# EX 5 Implementation of Logistic Regression Using Gradient Descent
-## DATE:
-## AIM:
-To write a program to implement the the Logistic Regression Using Gradient Descent.
-
-## Equipments Required:
-1. Hardware – PCs
-2. Anaconda – Python 3.7 Installation / Jupyter notebook
-
-## Algorithm
-1. 
-2. 
-3. 
-4. 
-
-## Program:
-```
-/*
-Program to implement the the Logistic Regression Using Gradient Descent.
-Developed by: 
-RegisterNumber:  
-*/
-```
-
-## Output:
+![WhatsApp Image 2024-10-04 at 21 13 37_34158a07](https://github.com/user-attachments/assets/ea27a170-2620-4507-b63f-2a60cca6530f)
+![WhatsApp Image 2024-10-04 at 21 14 10_df3d2f10](https://github.com/user-attachments/assets/8e8186c6-fcc0-4084-b309-43293c78c2a1)
 
 
 
